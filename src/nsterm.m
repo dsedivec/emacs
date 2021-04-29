@@ -9443,7 +9443,9 @@ nswindow_orderedIndex_sort (id w1, id w2, void *c)
   NSTRACE ("[EmacsWindow accessibilityAttributeValue:]");
 
   if ([attribute isEqualToString:NSAccessibilityRoleAttribute])
-    return NSAccessibilityTextFieldRole;
+    return NSAccessibilityWindowRole;
+  if ([attribute isEqualToString:NSAccessibilitySubroleAttribute])
+    return NSAccessibilityStandardWindowSubrole;
 
   if ([attribute isEqualToString:NSAccessibilitySelectedTextAttribute]
       && curbuf && ! NILP (BVAR (curbuf, mark_active)))
