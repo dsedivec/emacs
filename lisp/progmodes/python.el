@@ -423,10 +423,14 @@ This variant of `rx' supports common Python named REGEXPS."
                                         "match" "case"
                                         ;; Python 3.5+ PEP492
                                         (and "async" (+ space)
-                                             (or "def" "for" "with")))
+                                             (or "def" "for" "with"))
+                                        ;; PEP634
+                                        "match" "case")
                                     symbol-end))
             (dedenter          (seq symbol-start
-                                    (or "elif" "else" "except" "finally")
+                                    (or "elif" "else" "except" "finally"
+                                        ;; PEP634
+                                        "case")
                                     symbol-end))
             (block-ender       (seq symbol-start
                                     (or
@@ -5716,7 +5720,8 @@ likely an invalid python file."
                (pairs '(("elif" "elif" "if")
                         ("else" "if" "elif" "except" "for" "while")
                         ("except" "except" "try")
-                        ("finally" "else" "except" "try")))
+                        ("finally" "else" "except" "try")
+                        ("case" "case")))
                (dedenter (match-string-no-properties 0))
                (possible-opening-blocks (cdr (assoc-string dedenter pairs)))
                (collected-indentations)
