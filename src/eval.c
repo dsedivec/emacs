@@ -2207,7 +2207,7 @@ then strings and vectors are not accepted.  */)
     {
       Lisp_Object tmp = Fget (fun, Qinteractive_form);
       if (!NILP (tmp))
-	error ("Found an 'interactive-form' property!");
+	return Qt;
       fun = Fsymbol_function (fun);
     }
 
